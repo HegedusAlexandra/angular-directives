@@ -3,7 +3,9 @@
 <div class="container mt-2">
   <div class="row">
     <div class="d-grid gap-2">
-      <button (click)="toggleSearchbar()" class="btn btn-info" type="button">Tools</button>
+      <button (click)="toggleSearchbar()" class="btn btn-info" type="button">
+        Tools
+      </button>
     </div>
   </div>
   <div *ngIf="isSearchBarVisible; else searchbarHidden" class="row mt-2">
@@ -15,19 +17,29 @@
     </div>
   </div>
 </div>
-<ng-template #searchbarHidden>
-  Searchbar is hidden
-</ng-template>
+<ng-template #searchbarHidden> Searchbar is hidden </ng-template>
 
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <table>
+      <table class="table">
         <thead>
-          <tr></tr>
+          <tr>
+            <th>ID</th>
+            <th>F.N.</th>
+            <th>Seat</th>
+            <th>Service</th>
+            <th>Checked</th>
+          </tr>
         </thead>
         <tbody>
-          <tr></tr>
+          <tr *ngFor="let ticket of tickets">
+            <td>{{ ticket.id }}</td>
+            <td>{{ ticket.flightNumber }}</td>
+            <td>{{ ticket.seat }}</td>
+            <td>{{ ticket.service }}</td>
+            <td>{{ ticket.checked }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
