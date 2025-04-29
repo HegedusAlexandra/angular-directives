@@ -1,2 +1,35 @@
-<app-nav>
-</app-nav>
+<app-nav> </app-nav>
+
+<div class="container mt-2">
+  <div class="row">
+    <div class="d-grid gap-2">
+      <button (click)="toggleSearchbar()" class="btn btn-info" type="button">Tools</button>
+    </div>
+  </div>
+  <div *ngIf="isSearchBarVisible; else searchbarHidden" class="row mt-2">
+    <div class="col-4">
+      <input type="text" class="form-control" />
+    </div>
+    <div class="col-2">
+      <button class="btn btn-primary">search</button>
+    </div>
+  </div>
+</div>
+<ng-template #searchbarHidden>
+  Searchbar is hidden
+</ng-template>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table>
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody>
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
