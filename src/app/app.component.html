@@ -30,6 +30,7 @@
             <th>Seat</th>
             <th>Service</th>
             <th>Checked</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -39,7 +40,8 @@
             <td>{{ ticket.seat }}</td>
             <td>{{ ticket.service }}</td>
             <td>{{ ticket.checked }}</td>
-          </tr>
+            <td><app-btn-group [buttons]="btnGroup" (btnClick)="onGroupClick($event)" [data]="ticket"></app-btn-group></td>
+          </tr> 
         </tbody>
       </table>
     </div>
