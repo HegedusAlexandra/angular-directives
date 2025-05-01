@@ -39,9 +39,15 @@
             <td>{{ ticket.flightNumber }}</td>
             <td>{{ ticket.seat }}</td>
             <td>{{ ticket.service }}</td>
-            <td>{{ ticket.checked }}</td>
-            <td><app-btn-group [buttons]="btnGroup" (btnClick)="onGroupClick($event)" [data]="ticket"></app-btn-group></td>
-          </tr> 
+            <td> {{ ticket.checked | boolean : "YES" : "NO" }}</td>
+            <td>
+              <app-btn-group
+                [buttons]="btnGroup"
+                (btnClick)="onGroupClick($event)"
+                [data]="ticket"
+              ></app-btn-group>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

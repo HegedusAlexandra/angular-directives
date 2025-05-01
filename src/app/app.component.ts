@@ -9,6 +9,7 @@ import {
   BtnGroupComponent,
   IBtn,
 } from './common/btn-group/btn-group.component';
+import { BooleanPipe } from './pipe/boolean.pipe';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ import {
     CommonModule,
     AlertModule,
     ModalModule,
+    BooleanPipe,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -43,7 +45,7 @@ export class AppComponent {
     },
     {
       id: 2,
-      checked: false,
+      checked: true,
       flightNumber: 'wa3421',
       seat: 'E3',
       service: 'economy',
