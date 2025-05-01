@@ -10,6 +10,7 @@ import {
   IBtn,
 } from './common/btn-group/btn-group.component';
 import { BooleanPipe } from './pipe/boolean.pipe';
+import { ArrayFilterPipe } from './pipe/array-filter.pipe';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { BooleanPipe } from './pipe/boolean.pipe';
     AlertModule,
     ModalModule,
     BooleanPipe,
+    ArrayFilterPipe,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -40,22 +42,22 @@ export class AppComponent {
       id: 1,
       checked: false,
       flightNumber: 'wa3421',
-      seat: 'D3',
+      seat: 'A5',
       service: 'economy',
     },
     {
       id: 2,
       checked: true,
-      flightNumber: 'wa3421',
+      flightNumber: 'wk3421',
       seat: 'E3',
       service: 'economy',
     },
     {
       id: 3,
       checked: false,
-      flightNumber: 'wa3421',
+      flightNumber: 'wa3621',
       seat: 'F3',
-      service: 'economy',
+      service: 'business',
     },
   ];
   btnGroup: IBtn[] = [
@@ -71,4 +73,6 @@ export class AppComponent {
       }
     }
   }
+
+  filterPhrase :string= ''
 } 
