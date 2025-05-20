@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavComponent } from './common/nav/nav.component';
 import { CommonModule } from '@angular/common';
@@ -11,26 +11,27 @@ import {
 } from './common/btn-group/btn-group.component';
 import { BooleanPipe } from './pipe/boolean.pipe';
 import { ArrayFilterPipe } from './pipe/array-filter.pipe';
-import { HttpClient } from '@angular/common/http';
+import { BaseService } from './service/base.service';
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     NavComponent,
     BtnGroupComponent,
     CommonModule,
     AlertModule,
     ModalModule,
     BooleanPipe,
-    ArrayFilterPipe,
-    HttpClient
+    ArrayFilterPipe
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'angular-directives';
+
+  baseService = inject(BaseService) 
 
   isSearchBarVisible: boolean = false;
 
