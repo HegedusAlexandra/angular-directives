@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class BaseService<T> {
+export class BaseService<T extends {id: number}> {
 
   private readonly http: HttpClient = inject(HttpClient)
 
@@ -32,4 +32,16 @@ export class BaseService<T> {
     return this.http.post<T>(`${this.apiUrl}${this.entity}`, entity);
   }
   
+  update(entity: T): Observable<T> {
+    return this.http.patch<T> (
+      `${this.apiUrl}${this.entity}/${entity.id}`,
+      entity
+    )
+  }
+
+  delete(entity: T): Observable<T> {
+    return this.http.delete<T> (
+      `${this.apiUrl}${this.entity}/${entity.id}`
+    )
+  }
 }
