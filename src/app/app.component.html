@@ -34,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let ticket of tickets | arrayFilter:filterPhrase">
+          <tr *ngFor="let ticket of tickets$ | async | arrayFilter:filterPhrase">
             <td>{{ ticket.id }}</td>
             <td>{{ ticket.flightNumber }}</td>
             <td>{{ ticket.seat }}</td>

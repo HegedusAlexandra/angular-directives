@@ -33,15 +33,13 @@ export class AppComponent {
 
   ticketService: TicketService = inject(TicketService);
 
-  tickets$ = this.ticketService.list$;
-
   isSearchBarVisible: boolean = false;
 
   toggleSearchbar(): void {
     this.isSearchBarVisible = !this.isSearchBarVisible;
   }
 
-  tickets: Ticket[] = [
+ tickets: Ticket[] = [
     {
       id: 1,
       checked: false,
@@ -63,12 +61,14 @@ export class AppComponent {
       seat: 'F3',
       service: 'business',
     },
-  ];
+  ]; 
 
   btnGroup: IBtn[] = [
     { name: 'show', type: 'info', icon: 'fa fa-eye' },
     { name: 'remove', type: 'danger', icon: 'fa fa-trash' },
   ];
+
+  tickets$ = this.ticketService.list$; 
 
   ngOnInit(): void {
     this.ticketService.dispatch('getAll');
