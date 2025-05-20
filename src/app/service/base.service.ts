@@ -15,7 +15,7 @@ export class BaseService<T extends { id: number }> {
 
   one$: BehaviorSubject<T | null> = new BehaviorSubject<T | null>(null);
 
-  private actions: { [k: string]: Function } = {
+  private readonly actions: { [k: string]: Function } = {
     getAll: () => this.getAll().subscribe((list) => this.list$.next(list)),
 
     get: (id: number) => this.get(id).subscribe((one) => this.one$.next(one)),
@@ -40,7 +40,7 @@ export class BaseService<T extends { id: number }> {
       }),
   };
 
-  constructor(@Inject(String) protected entity: string) {
+  constructor(protected entity: string) {
     this.http
       .get(`http://localhost:3000/tickets`)
       .subscribe((tickets) => console.log(tickets));

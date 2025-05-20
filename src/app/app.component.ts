@@ -90,12 +90,24 @@ export class AppComponent {
       .subscribe((tickets) => console.log(tickets)); */
   }
 
-  onGroupClick(details: { name: string; data: any }) {
+/*   onGroupClick(details: { name: string; data: any }) {
     if (details.name === 'remove') {
       const index = this.tickets.findIndex((ticket) => ticket === details.data);
       if (index > -1) {
         this.tickets.splice(index, 1);
       }
+    }
+  } */
+
+  onGroupClick(details: {name: string; data: any}) {
+      
+    switch(details.name) {
+      case 'remove':
+        this.ticketService.dispatch('delete', (details.data as Ticket));
+        break;
+      case 'show':
+        this.ticketService.dispatch('get', (details.data as Ticket).id);
+        break
     }
   }
 
