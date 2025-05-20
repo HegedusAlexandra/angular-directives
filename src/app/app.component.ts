@@ -33,6 +33,8 @@ export class AppComponent {
 
   ticketService: TicketService = inject(TicketService);
 
+  tickets$ = this.ticketService.list$;
+
   isSearchBarVisible: boolean = false;
 
   toggleSearchbar(): void {
@@ -69,20 +71,23 @@ export class AppComponent {
   ];
 
   ngOnInit(): void {
-    const testTicket: Ticket = {
+    this.ticketService.dispatch('getAll');
+
+    /* const testTicket: Ticket = {
       id: 0,
       checked: false,
       flightNumber: 'wa3421',
       seat: 'A5',
       service: 'economy',
     };
+
     this.ticketService
       .create(testTicket)
       .subscribe((ticket) => console.log(ticket));
 
     this.ticketService
       .getAll()
-      .subscribe((tickets) => console.log(tickets));
+      .subscribe((tickets) => console.log(tickets)); */
   }
 
   onGroupClick(details: { name: string; data: any }) {
