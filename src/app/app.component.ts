@@ -62,10 +62,28 @@ export class AppComponent {
       service: 'business',
     },
   ];
+
   btnGroup: IBtn[] = [
     { name: 'show', type: 'info', icon: 'fa fa-eye' },
     { name: 'remove', type: 'danger', icon: 'fa fa-trash' },
   ];
+
+  ngOnInit(): void {
+    const testTicket: Ticket = {
+      id: 0,
+      checked: false,
+      flightNumber: 'wa3421',
+      seat: 'A5',
+      service: 'economy',
+    };
+    this.ticketService
+      .create(testTicket)
+      .subscribe((ticket) => console.log(ticket));
+
+    this.ticketService
+      .getAll()
+      .subscribe((tickets) => console.log(tickets));
+  }
 
   onGroupClick(details: { name: string; data: any }) {
     if (details.name === 'remove') {
