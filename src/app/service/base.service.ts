@@ -1,16 +1,30 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject, inject, Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BaseService {
+export class BaseService<T> {
 
   private readonly http: HttpClient = inject(HttpClient)
 
-  constructor() {
+  apiUrl: string = environment.apiUrl
+
+  constructor(
+    @Inject(String) protected entity: string,
+  ) {
     this.http.get(`http://localhost:3000/tickets`).subscribe(
       tickets => console.log(tickets)       
     );
    }
+
+  getAll(): Observable<T[]>{
+    return this.http.get<T[]>(`${this.apiUrl}${this.entity}`)
+  }
+
+  get(id:number): Observable<T>{
+    return this.http.get<T>(`${this.apiUrl}${this.entity}/${id}`)
+  }
 }

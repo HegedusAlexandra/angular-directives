@@ -11,7 +11,7 @@ import {
 } from './common/btn-group/btn-group.component';
 import { BooleanPipe } from './pipe/boolean.pipe';
 import { ArrayFilterPipe } from './pipe/array-filter.pipe';
-import { BaseService } from './service/base.service';
+import { TicketService } from './service/ticket.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,7 @@ import { BaseService } from './service/base.service';
     AlertModule,
     ModalModule,
     BooleanPipe,
-    ArrayFilterPipe
+    ArrayFilterPipe,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -31,7 +31,7 @@ import { BaseService } from './service/base.service';
 export class AppComponent {
   title = 'angular-directives';
 
-  baseService = inject(BaseService) 
+  ticketService: TicketService = inject(TicketService);
 
   isSearchBarVisible: boolean = false;
 
@@ -67,7 +67,7 @@ export class AppComponent {
     { name: 'remove', type: 'danger', icon: 'fa fa-trash' },
   ];
 
-  onGroupClick(details: {name: string, data: any}) {
+  onGroupClick(details: { name: string; data: any }) {
     if (details.name === 'remove') {
       const index = this.tickets.findIndex((ticket) => ticket === details.data);
       if (index > -1) {
@@ -76,5 +76,5 @@ export class AppComponent {
     }
   }
 
-  filterPhrase :string= ''
-} 
+  filterPhrase: string = '';
+}
