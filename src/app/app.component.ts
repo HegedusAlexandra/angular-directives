@@ -11,7 +11,7 @@ import {
 } from './common/btn-group/btn-group.component';
 import { BooleanPipe } from './pipe/boolean.pipe';
 import { ArrayFilterPipe } from './pipe/array-filter.pipe';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -24,6 +24,7 @@ import { ArrayFilterPipe } from './pipe/array-filter.pipe';
     ModalModule,
     BooleanPipe,
     ArrayFilterPipe,
+    HttpClient
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
