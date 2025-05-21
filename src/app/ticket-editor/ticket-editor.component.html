@@ -2,12 +2,12 @@
   <div *ngIf="ticket$ | async as ticket" class="card form-card">
     <div class="card-body">
       <h5>Edit Ticket</h5>
-      <form #ticketForm = "ngForm">
+      <form #ticketForm="ngForm" (ngSubmit)="onUpdate(ticket)">
         <div class="form-group">
           <label for="flightNumber" class="form-label">Flight Number</label>
           <input
             [(ngModel)]="ticket.flightNumber"
-            [ngModelOptions]="{updateOn: 'blur'}"
+            [ngModelOptions]="{ updateOn: 'blur' }"
             type="text"
             id="flightNumber"
             name="flightNumber"
@@ -15,7 +15,10 @@
             pattern="^[A-Za-z]{2}[0-9]{4}$"
             required
           />
-          <div *ngIf = "ticketForm.controls['flightNumber']?.invalid" class="error-message">
+          <div
+            *ngIf="ticketForm.controls['flightNumber']?.invalid"
+            class="error-message"
+          >
             It must consits of two letters and four numbers.
           </div>
         </div>
@@ -24,7 +27,7 @@
           <label for="service" class="form-label">Class</label>
           <select
             [(ngModel)]="ticket.service"
-            [ngModelOptions]="{updateOn: 'blur'}"
+            [ngModelOptions]="{ updateOn: 'blur' }"
             id="service"
             name="service"
             class="form-control"
@@ -34,7 +37,10 @@
             <option value="business">Business</option>
             <option value="tourist">Tourist</option>
           </select>
-          <div *ngIf = "ticketForm.controls['service']?.invalid" class="error-message">
+          <div
+            *ngIf="ticketForm.controls['service']?.invalid"
+            class="error-message"
+          >
             Please selecet a valid option.
           </div>
         </div>
@@ -43,7 +49,7 @@
           <label for="seat" class="form-label">Seat Number</label>
           <input
             [(ngModel)]="ticket.seat"
-            [ngModelOptions]="{updateOn: 'blur'}"
+            [ngModelOptions]="{ updateOn: 'blur' }"
             type="text"
             id="seat"
             name="seat"
@@ -51,7 +57,10 @@
             pattern="^[A-Za-z]{1}[0-9]{1}$"
             required
           />
-          <div *ngIf = "ticketForm.controls['seat']?.invalid" class="error-message">
+          <div
+            *ngIf="ticketForm.controls['seat']?.invalid"
+            class="error-message"
+          >
             It must consits of one letter and one number.
           </div>
         </div>
@@ -67,7 +76,7 @@
           <label for="checked" class="form-label">Checked</label>
         </div>
         <div class="d-grid mt-3">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" [disabled] = "ticketForm.invalid" class="btn btn-primary">
             <i class="fa fa-save"></i> Save
           </button>
         </div>
