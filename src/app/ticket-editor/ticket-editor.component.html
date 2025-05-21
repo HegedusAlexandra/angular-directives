@@ -1,4 +1,47 @@
+<div class="page d-flex justify-content-center p-2">
+  <div class="card form-card">
+    <div class="card-body">
+      <h5>Edit Ticket</h5>
+      <form>
+        <div class="form-group">
+          <label for="flightNumber" class="form-label">Flight Number</label>
+          <input
+            type="text"
+            id="flightNumber"
+            name="flightNumber"
+            class="form-control"
+          />
+        </div>
 
-<pre>
-    {{ ticket$ | async | json }}    
-</pre
+        <div class="form-group">
+          <label for="service" class="form-label">Class</label>
+          <select id="service" name="service" class="form-control">
+            <option value="economy">Economy</option>
+            <option value="business">Business</option>
+            <option value="tourist">Tourist</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="seat" class="form-label">Seat Number</label>
+          <input type="text" id="seat" name="seat" class="form-control" />
+        </div>
+
+        <div class="form-check mt-3">
+          <input
+            id="checked"
+            type="checkbox"
+            class="form-check-input"
+            name="checked"
+          />
+          <label for="checked" class="form-label">Checked</label>
+        </div>
+        <div class="d-grid mt-3">
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-save"></i> Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
