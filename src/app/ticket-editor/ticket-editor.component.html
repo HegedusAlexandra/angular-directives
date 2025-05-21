@@ -7,6 +7,7 @@
           <label for="flightNumber" class="form-label">Flight Number</label>
           <input
             [(ngModel)]="ticket.flightNumber"
+            [ngModelOptions]="{updateOn: 'blur'}"
             type="text"
             id="flightNumber"
             name="flightNumber"
@@ -23,6 +24,7 @@
           <label for="service" class="form-label">Class</label>
           <select
             [(ngModel)]="ticket.service"
+            [ngModelOptions]="{updateOn: 'blur'}"
             id="service"
             name="service"
             class="form-control"
@@ -41,6 +43,7 @@
           <label for="seat" class="form-label">Seat Number</label>
           <input
             [(ngModel)]="ticket.seat"
+            [ngModelOptions]="{updateOn: 'blur'}"
             type="text"
             id="seat"
             name="seat"
