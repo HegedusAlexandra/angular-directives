@@ -1,1 +1,53 @@
-<p>tickets works!</p>
+<div class="container mt-2">
+  <div class="row">
+    <div class="d-grid gap-2">
+      <button (click)="toggleSearchbar()" class="btn btn-info" type="button">
+        Tools
+      </button>
+    </div>
+  </div>
+  <div *ngIf="isSearchBarVisible; else searchbarHidden" class="row mt-2">
+    <div class="col-4">
+      <input #filterInput (input)="filterPhrase = filterInput.value" type="text" class="form-control" />
+    </div>
+    <div class="col-2">
+      <button class="btn btn-primary">search</button>
+    </div>
+  </div>
+</div>
+<ng-template #searchbarHidden> Searchbar is hidden </ng-template>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>F.N.</th>
+            <th>Seat</th>
+            <th>Service</th>
+            <th>Checked</th>
+            <th>Buttons</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ticket of tickets$ | async | arrayFilter:filterPhrase">
+            <td>{{ ticket.id }}</td>
+            <td>{{ ticket.flightNumber }}</td>
+            <td>{{ ticket.seat }}</td>
+            <td>{{ ticket.service }}</td>
+            <td> {{ ticket.checked | boolean : "YES" : "NO" }}</td>
+            <td>
+              <app-btn-group
+                [buttons]="btnGroup"
+                (btnClick)="onGroupClick($event)"
+                [data]="ticket"
+              ></app-btn-group>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
