@@ -13,12 +13,9 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [
     NavComponent,
-    BtnGroupComponent,
     CommonModule,
     AlertModule,
     ModalModule,
-    BooleanPipe,
-    ArrayFilterPipe,
     RouterOutlet
   ],
   templateUrl: './app.component.html',
