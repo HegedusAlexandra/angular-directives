@@ -11,6 +11,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NavComponent } from '../../common/nav/nav.component';
 import { ArrayFilterPipe } from '../../pipe/array-filter.pipe';
 import { BooleanPipe } from '../../pipe/boolean.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tickets',
@@ -96,13 +97,18 @@ export class TicketsComponent {
     }
   } */
 
+  router = inject(Router);
+
   onGroupClick(details: { name: string; data: any }) {
+    console.log(details);
+
     switch (details.name) {
       case 'remove':
         this.ticketService.dispatch('delete', details.data as Ticket);
         break;
       case 'show':
-        this.ticketService.dispatch('get', (details.data as Ticket).id);
+        this.router.navigate(['tickets/edit', details.data.id]);
+        //this.ticketService.dispatch('get', (details.data as Ticket).id);
         break;
     }
   }
