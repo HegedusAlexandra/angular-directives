@@ -1,11 +1,12 @@
 <div class="page d-flex justify-content-center p-2">
-  <div class="card form-card">
+  <div *ngIf="ticket$ | async as ticket" class="card form-card">
     <div class="card-body">
       <h5>Edit Ticket</h5>
       <form>
         <div class="form-group">
           <label for="flightNumber" class="form-label">Flight Number</label>
           <input
+            [(ngModel)]="ticket.flightNumber"
             type="text"
             id="flightNumber"
             name="flightNumber"
@@ -15,7 +16,12 @@
 
         <div class="form-group">
           <label for="service" class="form-label">Class</label>
-          <select id="service" name="service" class="form-control">
+          <select
+            [(ngModel)]="ticket.service"
+            id="service"
+            name="service"
+            class="form-control"
+          >
             <option value="economy">Economy</option>
             <option value="business">Business</option>
             <option value="tourist">Tourist</option>
@@ -24,11 +30,18 @@
 
         <div class="form-group">
           <label for="seat" class="form-label">Seat Number</label>
-          <input type="text" id="seat" name="seat" class="form-control" />
+          <input
+            [(ngModel)]="ticket.seat"
+            type="text"
+            id="seat"
+            name="seat"
+            class="form-control"
+          />
         </div>
 
         <div class="form-check mt-3">
           <input
+            [(ngModel)]="ticket.checked"
             id="checked"
             type="checkbox"
             class="form-check-input"
