@@ -40,6 +40,9 @@
           </select>
           <div *ngIf="!isValid('service')" class="error-message">
             Please select a valid option.
+            <div>
+              {{form.controls['service'].errors?.['airlineError']}}
+            </div>
           </div>
         </div>
 

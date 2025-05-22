@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { Ticket } from '../../model/ticket';
@@ -37,7 +39,7 @@ export class TicketCreateComponent {
         disabled: false,
       },
       {
-        validators: [Validators.required],
+        validators: [Validators.required,this.validateAirline()],
       }
     ),
     seat: new FormControl<string>(
@@ -59,5 +61,24 @@ export class TicketCreateComponent {
     return (
       this.form.controls[name]?.pristine || this.form.controls[name]?.valid
     );
+  }
+
+  validateAirline(): ValidatorFn {
+    return (control: AbstractControl) => {
+      if (this.form) {
+        const flightNumber = this.form.controls['flightNumber'].value;
+        if (flightNumber.slice(0, 2).toLowerCase() !== 'wz') {
+          return null;
+        }
+
+        const service = this.form.controls['service'].value;
+        if (service === 'business') {
+          return { airlineError: 'Wizzair does not have business class!' };
+        }
+
+        return null;
+      }
+      return null;
+    };
   }
 }
