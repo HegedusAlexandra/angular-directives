@@ -10,7 +10,6 @@
             type="text"
             class="form-control"
             name="flightNumber"
-            pattern="^[A-Za-z]{2}[0-9]{4}$"
             required
           />
           <div *ngIf="false" class="error-message">
@@ -25,8 +24,6 @@
             type="text"
             class="form-control"
             name="seat"
-            pattern="^[A-Za-z][0-9]$"
-            required
           />
           <div *ngIf="false" class="error-message">
             It must consist a letters and a numbers.
@@ -35,12 +32,7 @@
 
         <div class="form-group">
           <label class="form-label">service</label>
-          <select
-            formControlName="service"
-            class="form-select"
-            name="service"
-            required
-          >
+          <select formControlName="service" class="form-select" name="service">
             <option value="">please select</option>
             <option value="tourist">tourist</option>
             <option value="business">business</option>
