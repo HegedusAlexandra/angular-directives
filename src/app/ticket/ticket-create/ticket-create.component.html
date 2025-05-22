@@ -2,7 +2,7 @@
   <div class="card form-card">
     <div class="card-body">
       <h5 class="card-title">Create Ticket</h5>
-      <form [formGroup]="form">
+      <form [formGroup]="form" (ngSubmit) = "onCreate()">
         <div class="form-group">
           <label class="form-label">flightNumber</label>
           <input

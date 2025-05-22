@@ -12,6 +12,7 @@ import { Ticket } from '../../model/ticket';
 import { TicketService } from '../../service/ticket.service';
 import { CommonModule } from '@angular/common';
 import { map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-create',
@@ -21,6 +22,7 @@ import { map } from 'rxjs';
 })
 export class TicketCreateComponent {
   ticketService = inject(TicketService);
+  router = inject(Router);
   ticket = new Ticket();
   form: FormGroup = new FormGroup({
     flightNumber: new FormControl<string>(
@@ -41,7 +43,7 @@ export class TicketCreateComponent {
         disabled: false,
       },
       {
-        validators: [Validators.required,this.validateAirline()],
+        validators: [Validators.required, this.validateAirline()],
       }
     ),
     seat: new FormControl<string>(
@@ -54,9 +56,7 @@ export class TicketCreateComponent {
           Validators.required,
           Validators.pattern(/^[A-Za-z]{1}[0-9]{1}$/),
         ],
-        asyncValidators: [
-          this.validateSeat(),
-        ]
+        asyncValidators: [this.validateSeat()],
       }
     ),
     checked: new FormControl<boolean>(false),
@@ -88,19 +88,25 @@ export class TicketCreateComponent {
   }
 
   validateSeat(): AsyncValidatorFn {
-  return (control: AbstractControl) => this.ticketService.query(
-    {
-      flightNumber: this.form.controls['flightNumber'].value,
-      seat: this.form.controls['seat'].value,
-    }
-  ).pipe(
-    map(response => {
-      if (response.length) {
-        return { seatError: 'The seat has already been sold!' };
-      }
-      return null;
-    })
-  );
-}
+    return (control: AbstractControl) =>
+      this.ticketService
+        .query({
+          flightNumber: this.form.controls['flightNumber'].value,
+          seat: this.form.controls['seat'].value,
+        })
+        .pipe(
+          map((response) => {
+            if (response.length) {
+              return { seatError: 'The seat has already been sold!' };
+            }
+            return null;
+          })
+        );
+  }
 
+  onCreate(): void {
+    this.ticketService
+      .create(this.form.value)
+      .subscribe((created) => this.router.navigate(['/tickets']));
+  }
 }

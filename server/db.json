@@ -300,6 +300,20 @@
       "seat": "y2",
       "service": "business",
       "checked": false
+    },
+    {
+      "id": "c3fb",
+      "flightNumber": "bb2222",
+      "service": "tourist",
+      "seat": "a2",
+      "checked": true
+    },
+    {
+      "id": "46c2",
+      "flightNumber": "bu9899",
+      "service": "tourist",
+      "seat": "a2",
+      "checked": true
     }
   ]
 }
