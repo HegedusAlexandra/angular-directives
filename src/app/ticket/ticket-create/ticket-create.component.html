@@ -27,6 +27,9 @@
           />
           <div *ngIf="!isValid('seat')" class="error-message">
             It must consist a letter and a number.
+            <div>
+              {{form.controls['seat'].errors?.['seatError']}}
+            </div>
           </div>
         </div>
 

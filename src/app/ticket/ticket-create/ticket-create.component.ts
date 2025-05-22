@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
+  AsyncValidatorFn,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -10,6 +11,7 @@ import {
 import { Ticket } from '../../model/ticket';
 import { TicketService } from '../../service/ticket.service';
 import { CommonModule } from '@angular/common';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-create',
@@ -52,6 +54,9 @@ export class TicketCreateComponent {
           Validators.required,
           Validators.pattern(/^[A-Za-z]{1}[0-9]{1}$/),
         ],
+        asyncValidators: [
+          this.validateSeat(),
+        ]
       }
     ),
     checked: new FormControl<boolean>(false),
@@ -81,4 +86,21 @@ export class TicketCreateComponent {
       return null;
     };
   }
+
+  validateSeat(): AsyncValidatorFn {
+  return (control: AbstractControl) => this.ticketService.query(
+    {
+      flightNumber: this.form.controls['flightNumber'].value,
+      seat: this.form.controls['seat'].value,
+    }
+  ).pipe(
+    map(response => {
+      if (response.length) {
+        return { seatError: 'The seat has already been sold!' };
+      }
+      return null;
+    })
+  );
+}
+
 }

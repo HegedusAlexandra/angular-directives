@@ -3,7 +3,6 @@ import { Inject, inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-
 export class BaseService<T extends { id: number }> {
   private readonly http: HttpClient = inject(HttpClient);
 
@@ -39,9 +38,7 @@ export class BaseService<T extends { id: number }> {
   };
 
   constructor(protected entity: string) {
-    this.http
-      .get(`http://localhost:3000/tickets`)
-      .subscribe();
+    this.http.get(`http://localhost:3000/tickets`).subscribe();
   }
 
   dispatch(actionName: string, ...args: any[]): void {
@@ -69,5 +66,17 @@ export class BaseService<T extends { id: number }> {
 
   delete(entity: T): Observable<T> {
     return this.http.delete<T>(`${this.apiUrl}${this.entity}/${entity.id}`);
+  }
+
+  query(options: { [k: string]: string }): Observable<T[]> {
+    // http://localhost:3000/tickets?flightNumber=ao2778&seat=h5
+    const queryArray = [];
+    for (let key of Object.keys(options)) {
+      queryArray.push(`${key}=${options[key]}`);
+    }
+
+    return this.http.get<T[]>(
+      `${this.apiUrl}${this.entity}?${queryArray.join('&')}`
+    );
   }
 }
