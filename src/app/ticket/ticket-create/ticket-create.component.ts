@@ -48,10 +48,16 @@ export class TicketCreateComponent {
       {
         validators: [
           Validators.required,
-          Validators.pattern(/^[A-Za-z]{2}[0-9]{4}$/),
+          Validators.pattern(/^[A-Za-z]{1}[0-9]{1}$/),
         ],
       }
     ),
     checked: new FormControl<boolean>(false),
   });
+
+  isValid(name: string): boolean {
+    return (
+      this.form.controls[name]?.pristine || this.form.controls[name]?.valid
+    );
+  }
 }

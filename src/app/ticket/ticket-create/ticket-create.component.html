@@ -12,7 +12,7 @@
             name="flightNumber"
             required
           />
-          <div *ngIf="false" class="error-message">
+          <div *ngIf="!isValid('flightNumber')" class="error-message">
             It must consist two letters and four numbers.
           </div>
         </div>
@@ -25,8 +25,8 @@
             class="form-control"
             name="seat"
           />
-          <div *ngIf="false" class="error-message">
-            It must consist a letters and a numbers.
+          <div *ngIf="!isValid('seat')" class="error-message">
+            It must consist a letter and a number.
           </div>
         </div>
 
@@ -38,14 +38,14 @@
             <option value="business">business</option>
             <option value="economy">economy</option>
           </select>
-          <div *ngIf="false" class="error-message">
+          <div *ngIf="!isValid('service')" class="error-message">
             Please select a valid option.
           </div>
         </div>
 
         <div class="form-check mt-3">
           <input
-            formControlName="checked"
+          formControlName="checked"
             name="checked"
             id="check"
             class="form-check-input"
