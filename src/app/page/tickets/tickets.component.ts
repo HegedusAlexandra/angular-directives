@@ -112,6 +112,10 @@ export class TicketsComponent {
         break;
     }
   }
-
+  goToCreate():void {
+    console.log('fired');
+    
+    this.router.navigate(['/tickets/create']);
+  }
   filterPhrase: string = '';
 }

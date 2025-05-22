@@ -41,7 +41,7 @@ export class BaseService<T extends { id: number }> {
   constructor(protected entity: string) {
     this.http
       .get(`http://localhost:3000/tickets`)
-      .subscribe((tickets) => console.log(tickets));
+      .subscribe();
   }
 
   dispatch(actionName: string, ...args: any[]): void {
