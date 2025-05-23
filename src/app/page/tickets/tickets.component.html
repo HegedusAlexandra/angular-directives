@@ -14,17 +14,21 @@
     </div>
   </div>
   <div *ngIf="isSearchBarVisible; else searchbarHidden" class="row mt-2">
-    <div class="col-4">
+    <app-filter
+      [options]="filterOptions"
+      (filter)="onFilter($event)"
+    ></app-filter>
+    <!-- <div class="col-4">
       <input
         #filterInput
         (input)="filterPhrase = filterInput.value"
         type="text"
         class="form-control"
       />
-    </div>
+    </div> 
     <div class="col-2">
       <button class="btn btn-primary">search</button>
-    </div>
+    </div>-->
   </div>
 </div>
 <ng-template #searchbarHidden> Searchbar is hidden </ng-template>
@@ -45,7 +49,7 @@
         </thead>
         <tbody>
           <tr
-            *ngFor="let ticket of tickets$ | async | arrayFilter : filterPhrase"
+            *ngFor="let ticket of tickets$ | async | filter:filterPhrase:filterKey"
           >
             <td>{{ ticket.id }}</td>
             <td>{{ ticket.flightNumber }}</td>

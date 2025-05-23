@@ -12,6 +12,8 @@ import { NavComponent } from '../../common/nav/nav.component';
 import { ArrayFilterPipe } from '../../pipe/array-filter.pipe';
 import { BooleanPipe } from '../../pipe/boolean.pipe';
 import { Router } from '@angular/router';
+import { FilterComponent, IFilterItems } from '../../ticket/filter/filter.component';
+import { FilterPipe } from '../../ticket/filter/filter.pipe';
 
 @Component({
   selector: 'app-tickets',
@@ -22,6 +24,8 @@ import { Router } from '@angular/router';
     ModalModule,
     BooleanPipe,
     ArrayFilterPipe,
+    FilterComponent,
+    FilterPipe
   ],
   templateUrl: './tickets.component.html',
   styleUrl: './tickets.component.scss',
@@ -32,6 +36,10 @@ export class TicketsComponent {
   ticketService: TicketService = inject(TicketService);
 
   isSearchBarVisible: boolean = false;
+
+  filterPhrase:string = '';
+  
+  filterKey:string = '';
 
   toggleSearchbar(): void {
     this.isSearchBarVisible = !this.isSearchBarVisible;
@@ -66,36 +74,19 @@ export class TicketsComponent {
     { name: 'remove', type: 'danger', icon: 'fa fa-trash' },
   ];
 
+  filterOptions = [
+    {val:'', text: 'choose your key'},
+    {val:'id', text: 'ID'},
+    {val:'flightNumber', text: 'F.N.'},
+    {val:'seat', text: 'Seat'},
+    {val:'service', text: 'Service'}
+  ]
+
   tickets$ = this.ticketService.list$;
 
   ngOnInit(): void {
     this.ticketService.dispatch('getAll');
-
-    /* const testTicket: Ticket = {
-      id: 0,
-      checked: false,
-      flightNumber: 'wa3421',
-      seat: 'A5',
-      service: 'economy',
-    };
-
-    this.ticketService
-      .create(testTicket)
-      .subscribe((ticket) => console.log(ticket));
-
-    this.ticketService
-      .getAll()
-      .subscribe((tickets) => console.log(tickets)); */
   }
-
-  /*   onGroupClick(details: { name: string; data: any }) {
-    if (details.name === 'remove') {
-      const index = this.tickets.findIndex((ticket) => ticket === details.data);
-      if (index > -1) {
-        this.tickets.splice(index, 1);
-      }
-    }
-  } */
 
   router = inject(Router);
 
@@ -108,14 +99,16 @@ export class TicketsComponent {
         break;
       case 'show':
         this.router.navigate(['tickets/edit', details.data.id]);
-        //this.ticketService.dispatch('get', (details.data as Ticket).id);
         break;
     }
   }
+
+  onFilter(values:IFilterItems): void{
+    this.filterKey=values.key
+    this.filterPhrase= values.phrase
+  }
+
   goToCreate():void {
-    console.log('fired');
-    
     this.router.navigate(['/tickets/create']);
   }
-  filterPhrase: string = '';
 }
