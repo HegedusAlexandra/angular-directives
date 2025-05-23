@@ -13,6 +13,7 @@ import { TicketService } from '../../service/ticket.service';
 import { CommonModule } from '@angular/common';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-ticket-create',
@@ -23,6 +24,7 @@ import { Router } from '@angular/router';
 export class TicketCreateComponent {
   ticketService = inject(TicketService);
   router = inject(Router);
+  location = inject(Location);
   ticket = new Ticket();
   form: FormGroup = new FormGroup({
     flightNumber: new FormControl<string>(
@@ -107,6 +109,6 @@ export class TicketCreateComponent {
   onCreate(): void {
     this.ticketService
       .create(this.form.value)
-      .subscribe((created) => this.router.navigate(['/tickets']));
+      .subscribe((created) => this.location.back())
   }
 }

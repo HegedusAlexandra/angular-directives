@@ -314,6 +314,13 @@
       "service": "tourist",
       "seat": "a2",
       "checked": true
+    },
+    {
+      "id": "720d",
+      "flightNumber": "bu8888",
+      "service": "tourist",
+      "seat": "h5",
+      "checked": false
     }
   ]
 }
