@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './page/home/home.component';
-import { TicketsComponent } from './page/tickets/tickets.component';
 import { AboutComponent } from './page/about/about.component';
-import { TicketEditorComponent } from './ticket/ticket-editor/ticket-editor.component';
-import { TicketCreateComponent } from './ticket/ticket-create/ticket-create.component';
 
 export const routes: Routes = [
   {
@@ -12,14 +9,35 @@ export const routes: Routes = [
   },
   {
     path: 'tickets',
-    component: TicketsComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./page/tickets/tickets.component').then(
+            (m) => m.TicketsComponent
+          ),
+      },
+      {
+        path: 'edit/:id',
+        loadComponent: () =>
+          import('./ticket/ticket-editor/ticket-editor.component').then(
+            (m) => m.TicketEditorComponent
+          ),
+      },
+      {
+        path: 'create',
+        loadComponent: () =>
+          import('./ticket/ticket-create/ticket-create.component').then(
+            (m) => m.TicketCreateComponent
+          ),
+      },
+    ],
   },
   {
     path: 'about',
     component: AboutComponent,
   },
-  { path: 'tickets/edit/:id', component: TicketEditorComponent  },
-  { path: 'tickets/create', component: TicketCreateComponent },
   {
     path: '**',
     redirectTo: '',
